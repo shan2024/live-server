@@ -5,7 +5,7 @@ require('dotenv').config()
 
 const io = new Server(httpServer, {
   cors: {
-    origin: `${`${process.env.NEXT_PUBLIC_HOST_NAME}`}`
+    origin: "*"
   }
 });
 
