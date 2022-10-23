@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const http = require('http');
+const { SocketAddress } = require('net');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
 const port = 3333;
@@ -68,7 +69,7 @@ io.on('connection', (socket) => {
 });
 
 
-httpServer.listen(process.env.PORT || port, () => {
+server.listen(process.env.PORT || port, () => {
   console.log("Listening on port " + port);
 })
 
