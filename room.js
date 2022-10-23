@@ -1,14 +1,16 @@
 const {createServer} = require("http");
-const {Server} = require("socket.io");
 const httpServer = createServer();
-require('dotenv').config()
 
-const io = new Server(httpServer, {
-  cors: { origin : '*',}
+const io = require("socket.io")(httpServer, {
+  cors: {
+    origin: '*',
+    methods: ["GET", "POST"],
+    credentials: true
+  }
 });
 
-const port = 3333;
 
+const port = 3333;
 
 io.on('connection', (socket) => {
   socket.on('join_room', (roomCode)=> {
