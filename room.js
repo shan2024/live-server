@@ -1,7 +1,11 @@
-const {createServer} = require("http");
-const httpServer = createServer();
+const express = require('express');
+const app = express();
+const http = require('http');
+const server = http.createServer(app);
+const { Server } = require("socket.io");
+const port = 3333;
 
-const io = require("socket.io")(httpServer, {
+const io = new Server(server, {
   cors: {
     origin: '*',
     methods: ["GET", "POST"],
@@ -9,8 +13,20 @@ const io = require("socket.io")(httpServer, {
   }
 });
 
+app.get('/', (req, res) => {
+  res.send(`
+  <html>
+    <head>
+      <title>Drawing Server</title>
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+    </head>
+    <body>
+      <div id="app">Socket server online!</div>
+    </body>
+  </html>
+`);
+});
 
-const port = 3333;
 
 io.on('connection', (socket) => {
   socket.on('join_room', (roomCode)=> {
