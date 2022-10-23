@@ -4,9 +4,7 @@ const httpServer = createServer();
 require('dotenv').config()
 
 const io = new Server(httpServer, {
-  cors: {
-    origin: "*"
-  }
+  cors: { origin : '*',}
 });
 
 const port = 3333;
